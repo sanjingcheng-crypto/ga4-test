@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GA4 Test Page</title>
-    <!-- Google Tag (gtag.js) - 替换 G-XXXXXXXXXX 为你的 Measurement ID -->
+    <title>GA4 Test Page - Updated by OpenClaw</title>
+    <!-- Google Tag (gtag.js) - Measurement ID: G-VL5PF5PZS7 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL5PF5PZS7"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -62,12 +62,20 @@
         }
         .button-secondary { background: #FF6B6B; }
         .button-tertiary { background: #4ECDC4; }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: #4CAF50;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🚀 GA4 Testing Page</h1>
-        <p class="subtitle">Google Analytics 4 测试验证页面</p>
+        <p class="subtitle">Google Analytics 4 测试验证页面 <span class="status-badge">已更新</span></p>
         
         <div class="info-box">
             <p><strong>Measurement ID:</strong> <span style="font-family: monospace;">G-VL5PF5PZS7</span></p>
@@ -97,10 +105,17 @@
                 <li>⬜ 自定义参数传递</li>
             </ul>
         </div>
+        
+        <div class="info-box" style="margin-top: 20px;">
+            <h3>🔗 重要链接</h3>
+            <p><strong>GitHub Pages:</strong> <a href="https://sanjingcheng-crypto.github.io/ga4-test/" style="color: #4ECDC4;">https://sanjingcheng-crypto.github.io/ga4-test/</a></p>
+            <p><strong>更新日期:</strong> <span id="updateDate"></span></p>
+        </div>
     </div>
     
     <script>
         document.getElementById('loadTime').textContent = new Date().toLocaleString();
+        document.getElementById('updateDate').textContent = new Date().toLocaleString();
         document.getElementById('userAgent').textContent = navigator.userAgent.substring(0, 50) + '...';
         
         function trackEvent(action, label, value) {
