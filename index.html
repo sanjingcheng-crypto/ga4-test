@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA4 Test Page</title>
+    <!-- Google Tag (gtag.js) - 替换 G-XXXXXXXXXX 为你的 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL5PF5PZS7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VL5PF5PZS7');
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .event-button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .event-button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .button-secondary { background: #FF6B6B; }
+        .button-tertiary { background: #4ECDC4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 GA4 Testing Page</h1>
+        <p class="subtitle">Google Analytics 4 测试验证页面</p>
+        
+        <div class="info-box">
+            <p><strong>Measurement ID:</strong> <span style="font-family: monospace;">G-VL5PF5PZS7</span></p>
+            <p><strong>Page loaded at:</strong> <span id="loadTime"></span></p>
+            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+        </div>
+        
+        <h2>🎯 Test Events</h2>
+        <p>点击以下按钮触发 GA4 事件：</p>
+        
+        <button class="event-button" onclick="trackEvent('button_click', 'primary_button', 1)">
+            👆 按钮点击事件
+        </button>
+        <button class="event-button button-secondary" onclick="trackPurchase()">
+            🛒 模拟购买 ($99)
+        </button>
+        <button class="event-button button-tertiary" onclick="trackCustomEvent()">
+            📊 自定义事件
+        </button>
+        
+        <div class="info-box" style="margin-top: 30px;">
+            <h3>📋 验证清单</h3>
+            <ul>
+                <li>✅ Page View 自动发送</li>
+                <li>⬜ 点击事件（点击上方按钮）</li>
+                <li>⬜ 购买事件（点击购物车按钮）</li>
+                <li>⬜ 自定义参数传递</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('loadTime').textContent = new Date().toLocaleString();
+        document.getElementById('userAgent').textContent = navigator.userAgent.substring(0, 50) + '...';
+        
+        function trackEvent(action, label, value) {
+            gtag('event', action, {
+                'event_category': 'engagement',
+                'event_label': label,
+                'value': value || 1
+            });
+            console.log('✅ Event tracked:', action, label);
+            showToast(`Event sent: ${action}`);
+        }
+        
+        function trackPurchase() {
+            gtag('event', 'purchase', {
+                'transaction_id': 'test_' + Date.now(),
+                'value': 99.00,
+                'currency': 'USD',
+                'items': [{
+                    'item_name': 'Test Product',
+                    'item_id': 'SKU_001',
+                    'price': '99.00',
+                    'quantity': 1
+                }]
+            });
+            console.log('✅ Purchase event tracked');
+            showToast('Purchase event sent! ($99)');
+        }
+        
+        function trackCustomEvent() {
+            gtag('event', 'custom_interaction', {
+                'custom_param_1': 'test_value',
+                'custom_param_2': 123,
+                'event_time': new Date().toISOString()
+            });
+            console.log('✅ Custom event tracked');
+            showToast('Custom event with params sent!');
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
